@@ -21,5 +21,5 @@ export const handler: APIGatewayProxyHandler =
                 "Access-Control-Allow-Origin": "*",
             },
             body: deleteData,
-    }
+        };
 };

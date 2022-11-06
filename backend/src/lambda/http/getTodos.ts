@@ -23,5 +23,5 @@ export const handler: APIGatewayProxyHandler =
             headers: {
                 "Access-Control-Allow-Origin": "*",
             },
-        }
+        };
 };

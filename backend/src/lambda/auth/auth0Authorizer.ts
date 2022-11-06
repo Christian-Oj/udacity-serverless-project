@@ -14,20 +14,20 @@ const logger = createLogger('auth');
 // To get this URL you need to go to an Auth0 page -> Show Advanced Settings -> Endpoints -> JSON Web Key Set
 
 
-const uriJWT = 'https://dev-eyotfksp.us.auth0.com/.well-known/jwks.json'
+const uriJWT = 'https://dev-eyotfksp.us.auth0.com/.well-known/jwks.json';
 
 
 export const handler = async (
   event: CustomAuthorizerEvent
 ): Promise<CustomAuthorizerResult> => {
 
-  logger.info('Authorizing a user', event.authorizationToken)
+  logger.info('Authorizing a user', event.authorizationToken);
 
   try {
 
-    const jwtToken = await verifyToken(event.authorizationToken)
+    const jwtToken = await verifyToken(event.authorizationToken);
 
-    logger.info('User was authorized', jwtToken)
+    logger.info('User was authorized', jwtToken);
 
     return {
       principalId: jwtToken.sub,
@@ -41,10 +41,10 @@ export const handler = async (
           }
         ]
       }
-    }
+    };
   } catch (e) {
 
-    logger.error('User not authorized', { error: e.message })
+    logger.error('User not authorized', { error: e.message });
 
     return {
       principalId: 'user',
@@ -72,28 +72,28 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
   // TODO: Implement token verification
   // You should implement it similarly to how it was implemented for the exercise for the lesson 5
   // You can read more about how to do this here: https://auth0.com/blog/navigating-rs256-and-jwks/
-    const data = jwtStr['data']['keys'][0]['x5c'][0]
-    const certStr = `-----BEGIN CERTIFICATE-----\n${data}\n-----END CERTIFICATE-----`
+    const data = jwtStr['data']['keys'][0]['x5c'][0];
+    const certStr = `-----BEGIN CERTIFICATE-----\n${data}\n-----END CERTIFICATE-----`;
 
     return verify(
       token, certStr,
       {algorithms: ['RS256'] }
-    ) as JwtPayload
+    ) as JwtPayload;
 
   } catch(err){
-    logger.error('Token is invalid', { error: err.message })
+    logger.error('Token is invalid', { error: err.message });
   }
 }
 
 function getToken(authHeader: string): string {
-  if (!authHeader) throw new Error('No authentication header')
+  if (!authHeader) throw new Error('No authentication header');
 
   if (!authHeader.toLowerCase().startsWith('bearer '))
-    throw new Error('Invalid authentication header')
+    throw new Error('Invalid authentication header');
 
-  const split = authHeader.split(' ')
-  const token = split[1]
+  const split = authHeader.split(' ');
+  const token = split[1];
 
-  return token
+  return token;
 }
 

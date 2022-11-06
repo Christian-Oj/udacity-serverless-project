@@ -25,5 +25,5 @@ export const handler: APIGatewayProxyHandler =
                 body: JSON.stringify({
                     "item": item
                 }),
-            }
+            };
 };

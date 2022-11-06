@@ -23,5 +23,5 @@ export const handler: APIGatewayProxyHandler =
                 "item": getTodoItem
             }),
             statusCode: status,
-        }
+        };
 };

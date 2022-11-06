@@ -4,10 +4,8 @@ import { Types } from 'aws-sdk/clients/s3';
 import { TodoItem } from "../models/TodoItem";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
-const AWSXRay = require('aws-xray-sdk')
-const XAWS = AWSXRay.captureAWS(AWS)
-
-
+const AWSXRay = require('aws-xray-sdk');
+const XAWS = AWSXRay.captureAWS(AWS);
 
 // TODO: Implement the dataLayer logic
 
@@ -22,8 +20,7 @@ export class TodoDataLogic {
         private readonly awsBucketStorage = process.env.TODO_AWS_BUCKET) {
     }
 
-    async userGetTodo(userId: string): 
-    Promise<TodoItem[]> {
+    async userGetTodo(userId: string): Promise<TodoItem[]> {
 
         const attrExpressionValue = {":userId": userId};
 
@@ -77,19 +74,19 @@ export class TodoDataLogic {
         const keys =  {
             "userId": userId,
             "todoId": todoId
-        }
+        };
 
         const attrExpressionValue = {
             ":a": todoUpdate['name'],
             ":b": todoUpdate['dueDate'],
             ":c": todoUpdate['done']
-        }
+        };
 
         const attrExpressionName = {
             "#a": "name",
             "#b": "dueDate",
             "#c": "done"
-        }
+        };
 
         const paramPayload = {
             TableName: this.todoTable,
@@ -118,7 +115,7 @@ export class TodoDataLogic {
         const keys = {
             "userId": userId,
             "todoId": todoId
-        }
+        };
 
         const paramPayload = {
             TableName: this.todoTable,

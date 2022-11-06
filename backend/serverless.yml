@@ -14,7 +14,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: ${opt:stage, 'dev'}
-  region: ${opt:region, 'us-east-2'}
+  region: ${opt:region, 'us-east-1'}
   
 
   tracing: 
@@ -26,7 +26,7 @@ provider:
   environment:
     PROJECT_NAME: serverless-todo-app
     DYNAMODB_TODOS_TABLE: serverless-todo-app-${self:provider.stage}
-    TODO_AWS_BUCKET: serverless-todo-app-${self:provider.stage}
+    TODO_AWS_BUCKET: serverless-todo-app-s3-${self:provider.stage}
 
 custom:
   documentation:

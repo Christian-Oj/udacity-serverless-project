@@ -13,5 +13,5 @@ export function createLogger(loggerName: string) {
     transports: [
       new winston.transports.Console()
     ]
-  })
+  });
 }
