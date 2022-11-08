@@ -20,7 +20,7 @@ export class TodoDataLogic {
         private readonly awsBucketStorage = process.env.TODO_AWS_BUCKET) {
     }
 
-    async userGetTodo(userId: string): Promise<TodoItem[]> {
+    async getTodoForUser(userId: string): Promise<TodoItem[]> {
 
         const attrExpressionValue = {":userId": userId};
 
@@ -47,7 +47,7 @@ export class TodoDataLogic {
         return items as TodoItem[];
     }
 
-    async userCreateTodo(todoItem: TodoItem): 
+    async createTodoForUser(todoItem: TodoItem): 
         Promise<TodoItem> {
 
         const paramPayload = {
@@ -65,7 +65,7 @@ export class TodoDataLogic {
         return todoItem as TodoItem;
     }
 
-    async userUpdateTodo(
+    async updateTodoForUser(
         todoUpdate: TodoUpdate, 
         todoId: string, 
         userId: string
@@ -107,7 +107,7 @@ export class TodoDataLogic {
         return attributes as TodoUpdate;
     }
 
-    async userDeleteTodo(
+    async deleteTodoForUser(
         todoId: string, 
         userId: string): 
         Promise<string> {
@@ -130,7 +130,7 @@ export class TodoDataLogic {
         return "" as string;
     }
 
-    async usercreatePresignedUrl(
+    async createPresignedUrl(
         todoId: string): 
         Promise<string> {
 

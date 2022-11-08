@@ -1,6 +1,6 @@
 import {APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler} from 'aws-lambda';
 import 'source-map-support/register'
-import { userDeleteTodo } from "../../domainLogic/otherTodos";
+import { deleteTodoForUser } from "../../businessLogic/todo";
 
 
 export const handler: APIGatewayProxyHandler = 
@@ -13,7 +13,7 @@ export const handler: APIGatewayProxyHandler =
         const auth = event.headers.Authorization;
         const jwt = auth.split(' ')[1];
 
-        const deleteData = await userDeleteTodo(todoId, jwt);
+        const deleteData = await deleteTodoForUser(todoId, jwt);
 
         return {
             statusCode: status,

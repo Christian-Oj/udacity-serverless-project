@@ -1,7 +1,7 @@
 import 'source-map-support/register'
 import {APIGatewayProxyEvent, APIGatewayProxyHandler, APIGatewayProxyResult} from 'aws-lambda'
 import { UpdateTodoRequest } from '../../requests/UpdateTodoRequest'
-import { userUpdateTodo } from "../../domainLogic/updateTodo";
+import { updateTodoForUser } from "../../businessLogic/todo";
 
 export const handler: APIGatewayProxyHandler = 
     async (event: APIGatewayProxyEvent): 
@@ -15,7 +15,7 @@ export const handler: APIGatewayProxyHandler =
             const jwt = auth.split(' ')[1];
 
             const todoUpdate: UpdateTodoRequest = JSON.parse(event.body);
-            const item = await userUpdateTodo(todoUpdate, todoId, jwt);
+            const item = await updateTodoForUser(todoUpdate, todoId, jwt);
 
             return {
                 statusCode: status,

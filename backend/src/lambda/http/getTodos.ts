@@ -1,6 +1,6 @@
 import {APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler} from 'aws-lambda';
 import 'source-map-support/register'
-import { userGetTodo } from "../../domainLogic/otherTodos";
+import { getTodoForUser } from "../../businessLogic/todo";
 
 
 export const handler: APIGatewayProxyHandler = 
@@ -13,7 +13,7 @@ export const handler: APIGatewayProxyHandler =
         
         const jwt = auth.split(' ')[1];
 
-        const userTodo = await userGetTodo(jwt);
+        const userTodo = await getTodoForUser(jwt);
 
         return {
             body: JSON.stringify({
